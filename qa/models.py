@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 class Question(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
-    like = models.IntegerField()
-    unlike = models.IntegerField()
+    like = models.IntegerField(default=0)
+    unlike = models.IntegerField(default=0)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     create_date = models.DateTimeField(null=True)
 
