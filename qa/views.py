@@ -3,6 +3,7 @@ from .models import Question, Answer
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
 
 
 def question_list(request):
@@ -19,12 +20,12 @@ def question_detail(request, pk):
                 question=question,
                 content=content,
                 author=request.user,
-                created_at=timezone.now()
+                create_date=timezone.now()
             )
         return redirect('question_detail', pk=pk)
     return render(request, 'qa/question_detail.html', {'question': question})
 
-
+@csrf_exempt
 @login_required
 def ask_question(request):
     if request.method == 'POST':
@@ -36,7 +37,11 @@ def ask_question(request):
                 title=title,
                 content=content,
                 author=request.user,
-                created_at=timezone.now()
+                create_date=timezone.now()
             )
-        return redirect('question_list')
+        return redirect('question-list')
     return render(request, 'qa/ask_question.html')
+
+
+def csrf_attack(request):
+    return render(request, 'attack.html')
