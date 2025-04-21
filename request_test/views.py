@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import UploadedFile
 
 
 def get_request_info(request):
@@ -20,3 +21,23 @@ def get_request_info(request):
     return render(request=request, template_name='request_test/request_info.html', context=context)
 
 
+def upload_file(request):
+    upload_file_url = None
+    title = None
+    success = False
+
+    print(request.FILES)
+
+    if request.method == 'POST' and request.FILES.get('file'):
+        file = request.FILES.get('file')
+        title = request.POST.get('title')
+        uploaded = UploadedFile(title=title, file=file)
+        uploaded.save()
+        upload_file_url = uploaded.file.url
+        success = True
+    
+    return render(request, 'request_test/upload_file.html', {
+        'upload_file_url': upload_file_url,
+        'title': title,
+        'success': success
+    })
