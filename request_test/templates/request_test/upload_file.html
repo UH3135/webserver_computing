@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>파일 업로드 테스트</title>
+  </head>
+  <body>
+    <h2>파일 업로드</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label>제목</label><br />
+      <input type="text" name="title" /><br /><br />
+
+      <label>파일 선택</label>
+      <input type="file" name="file" /><br /><br />
+
+      <button type="submit">upload</button>
+    </form>
+
+    {% if success %}
+    <h3>Result</h3>
+    <p><strong>title: </strong>{{ title }}</p>
+    <p><a href="{{ uploaded_file_url }}">Uploaded File</a></p>
+    {% endif %}
+  </body>
+</html>
