@@ -1,10 +1,10 @@
 <h1>📚 책 목록</h1>
+<p>Debug: {{ books|length }} books found</p>
 <ul>
   {% for book in books %}
   <li>
-    <a href="{% url '#book.title#' book.id %}">
-      # 여기에 동작 코드를 작성 하세요 (1점) {{ book.title }} by {{ book.author
-      }}
+    <a href="{% url 'library:book_history' book.id %}">
+      {{ book.title }} by {{ book.author }}
     </a>
   </li>
   {% empty %}
