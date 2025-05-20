@@ -1,0 +1,13 @@
+<h1>📚 책 목록</h1>
+<ul>
+  {% for book in books %}
+  <li>
+    <a href="{% url '#book.title#' book.id %}">
+      # 여기에 동작 코드를 작성 하세요 (1점) {{ book.title }} by {{ book.author
+      }}
+    </a>
+  </li>
+  {% empty %}
+  <li>등록된 책이 없습니다.</li>
+  {% endfor %}
+</ul>
