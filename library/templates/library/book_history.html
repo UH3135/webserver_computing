@@ -2,9 +2,13 @@
 <ul>
   {% for history in histories %}
   <li>
-    {{ history.user.username }} - {{ history.borrowed_at|date:"Y-m-d H:i" }} {%
-    if history.returned_at %} (반납: {{ history.returned_at|date:"Y-m-d" }}) {%
-    else %} 🕒 미반납 {% endif %}
+    {{ history.user.username }} - {{ history.borrowed_at|date:"Y-m-d H:i" }}
+    <br>
+    {% if history.returned_at %} (반납: {{ history.returned_at|date:"Y-m-d" }})
+    {% else %}
+    🕒 미반납
+    <br>
+    {% endif %}
   </li>
   {% empty %}
   <li>대출 이력이 없습니다.</li>

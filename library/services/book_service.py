@@ -6,7 +6,7 @@ def get_all_books():
     return Book.objects.all()
 
 def get_book_by_id(book_id: int):
-    return Book.objects.filter(id=book_id) 
+    return Book.objects.get(id=book_id) 
 
 def get_borrow_history_for_book(book: Book):
-    return BorrowHistory.objects.filter(book=book)
+    return book.borrow_history.all()
