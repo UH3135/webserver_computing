@@ -3,6 +3,7 @@ from library.models import Book, BorrowHistory
 from django.contrib.auth.models import User
 from django.utils import timezone
 from datetime import timedelta
+from datetime import timezone as dt_timezone
 from faker import Faker
 import random
 
@@ -25,7 +26,7 @@ class Command(BaseCommand):
         for _ in range(total):
             book = random.choice(books)
             user = random.choice(users)
-            borrowed_at = fake.date_time_between(start_date='-1y', end_date='now', tzinfo=timezone.utc)
+            borrowed_at = fake.date_time_between(start_date='-1y', end_date='now', tzinfo=dt_timezone.utc)
             returned = random.choice([True, False])
             returned_at = borrowed_at + timedelta(days=random.randint(1, 30)) if returned else None
             
