@@ -46,3 +46,11 @@ def test_get_borrow_history_success():
 
     assert len(histories) == 1
     assert histories[0] == history
+
+
+@pytest.mark.django_db
+def test_get_borrow_history_not_found():
+    book = Book.objects.create(title='Empty Book', author='Nobody', isbn='99999999')
+
+    with pytest.raises(BookHasNoBorrowHistory, match='No Histories found with this book') as exec_info:
+        get_borrow_history_for_book(book)
